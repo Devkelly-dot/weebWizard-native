@@ -9,6 +9,7 @@ export default function HomeTitle() {
                 <Text style={styles.secondPart}>Wizard</Text>
             </Text>
             <View style={styles.divider}></View>
+            <Text>Select An Anime to see where it is Streaming</Text>
         </View>
     );
 }
