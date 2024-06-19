@@ -1,7 +1,10 @@
+import { LoginProvider } from "../../../context/loginContext/loginContext";
 import AccountInteractor from "./accountInteractor";
 
 export default function AccountFetcher() {
     return (
-        <AccountInteractor/>
+        <LoginProvider>
+            <AccountInteractor/>
+        </LoginProvider>
     )
 }

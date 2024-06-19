@@ -1,7 +1,7 @@
 import { resetAuth, setEmail, setId, setSubscription, setToken } from "../app/redux/authSlice";
-import { saveToLocalStorage } from "./localStorage";
+import { deleteFromLocalStorage, saveToLocalStorage } from "./localStorage";
 
-export async function login (dispatch, user) {
+export async function dispatchLogin (dispatch, user) {
   // Destructure user object
   const { _id, token, email, subscription } = user;
 
@@ -18,7 +18,7 @@ export async function login (dispatch, user) {
   await saveToLocalStorage('subscription', subscription);
 };
 
-export async function logout (dispatch) {
+export async function dispatchLogout (dispatch) {
   // Dispatch action to reset Redux state
   dispatch(resetAuth());
 

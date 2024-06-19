@@ -1,6 +1,8 @@
-import { Text, View } from "react-native";
-import LoginForm from "../components/loginForm/loginForm";
-import { useState } from "react";
+import { Text, TouchableOpacity, View } from "react-native";
+import { useEffect, useState } from "react";
+import { LoginPage } from "../../loginPage/loginPage";
+import { useSelector } from "react-redux";
+import { useLogin } from "../../../context/loginContext/loginContext";
 
 const screens = {
     LOGIN: 'login',
@@ -9,11 +11,35 @@ const screens = {
     ACCOUNT: 'account'
 }
 export default function AccountContent() {
+    const token = useSelector((state)=>state.auth.token);
+    const {logout} = useLogin();
     const [screen, setScreen] = useState(screens.LOGIN);
     
+    useEffect(()=>{
+        if (token) {
+            setScreen(screens.ACCOUNT);
+        } else {
+            setScreen(screens.LOGIN);
+        }
+    }, [token]);
+
     return (
         <View>
-            <LoginForm/>
+            {
+                screen === screens.LOGIN ?
+                    <LoginPage/>
+                :
+                    <View>
+                        <Text>
+                            Account
+                        </Text>
+                        <TouchableOpacity onPress={()=>logout()}>
+                            <Text>
+                                Logout
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+            }
         </View>
     )
 }
