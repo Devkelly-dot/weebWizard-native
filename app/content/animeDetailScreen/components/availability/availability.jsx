@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native"
+import { Linking, StyleSheet, Text, TouchableOpacity, View } from "react-native"
 
 export default function AnimeAvailability({streamingInfo}) {
     return (

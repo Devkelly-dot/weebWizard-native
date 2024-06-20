@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Text, View, StyleSheet, Image, ScrollView, TouchableOpacity, Linking } from "react-native";
+import React from 'react';
+import { StyleSheet, ScrollView} from "react-native";
 import { useAnimeDetails } from "../../../context/animeDetailContext/animeDetailContext";
 import { useAnimeAvailability } from '../../../context/animeAvailabilityContext/animeAvailabilityContext';
 import AnimeImage from '../components/image/animeImage';

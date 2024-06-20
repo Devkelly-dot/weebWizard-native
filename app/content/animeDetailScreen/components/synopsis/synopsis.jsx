@@ -11,7 +11,7 @@ export default function AnimeSynopsis({animeData}) {
     return (
         <View style={styles.synopsisContainer}>
             <Text style={styles.synopsis}>
-                {showFullSynopsis ? animeData?.synopsis : `${animeData?.synopsis.substring(0, 150)}...`}
+                {showFullSynopsis ? animeData?.synopsis : `${animeData?.synopsis?.substring(0, 150)}...`}
             </Text>
             <TouchableOpacity onPress={toggleSynopsis}>
                 <Text style={styles.readMore}>{showFullSynopsis ? 'Read Less' : 'Read More'}</Text>

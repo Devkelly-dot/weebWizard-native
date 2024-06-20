@@ -4,11 +4,11 @@ export default function AnimeStatistics({animeData}) {
     
     return (
         <View style={styles.statistics}>
-            <Text style={styles.statText}>Score: {animeData?.statistics.score}</Text>
-            <Text style={styles.statText}>Ranked: {animeData?.statistics.ranked}</Text>
-            <Text style={styles.statText}>Popularity: {animeData?.statistics.popularity}</Text>
-            <Text style={styles.statText}>Members: {animeData?.statistics.members}</Text>
-            <Text style={styles.statText}>Favorites: {animeData?.statistics.favorites}</Text>
+            <Text style={styles.statText}>Score: {animeData?.statistics?.score}</Text>
+            <Text style={styles.statText}>Ranked: {animeData?.statistics?.ranked}</Text>
+            <Text style={styles.statText}>Popularity: {animeData?.statistics?.popularity}</Text>
+            <Text style={styles.statText}>Members: {animeData?.statistics?.members}</Text>
+            <Text style={styles.statText}>Favorites: {animeData?.statistics?.favorites}</Text>
         </View>
     )
 }
