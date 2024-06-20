@@ -1,13 +1,11 @@
-import { useLocalSearchParams } from "expo-router";
-import { Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import AnimeDetailScreen from "../screens/animeDetail/animeDetailScreen";
 
-export default function AnimeDetailScreen() {
-    const { id } = useLocalSearchParams();
+export default function AnimeDetailTab() {
 
     return (
         <SafeAreaView>
-            <Text>{id}</Text>
+            <AnimeDetailScreen/>
         </SafeAreaView>
     )
 }
