@@ -1,3 +1,4 @@
+import { AccountProvider } from "../../../context/accountContext/accountContext";
 import { LoginProvider } from "../../../context/loginContext/loginContext";
 import { RegisterProvider } from "../../../context/registerContext/registerContext";
 import { SettingsPageProvider } from "../context/settingsPageContext";
@@ -8,7 +9,9 @@ export default function AccountFetcher() {
         <SettingsPageProvider>
             <LoginProvider>
                 <RegisterProvider>
-                    <AccountInteractor/>
+                    <AccountProvider>
+                        <AccountInteractor/>
+                    </AccountProvider>
                 </RegisterProvider>
             </LoginProvider>
         </SettingsPageProvider>

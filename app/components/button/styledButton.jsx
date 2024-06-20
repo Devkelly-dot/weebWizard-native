@@ -10,6 +10,7 @@ export default function StyledButton({text, onPress}) {
 
 const styles = StyleSheet.create({
     button: {
+      width: '100%',
       backgroundColor: '#3498db',
       padding: 15,
       borderRadius: 10,

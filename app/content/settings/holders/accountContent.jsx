@@ -5,10 +5,10 @@ import { useSelector } from "react-redux";
 import { useLogin } from "../../../context/loginContext/loginContext";
 import { useSettingsPage } from "../context/settingsPageContext";
 import { RegisterPage } from "../../registerPage/registerPage";
+import AccountPage from "../../accountPage/accountPage";
 
 export default function AccountContent() {
     const token = useSelector((state)=>state.auth.token);
-    const {logout} = useLogin();
     const {screen, screens, setScreen} = useSettingsPage();
 
     useEffect(()=>{
@@ -22,22 +22,13 @@ export default function AccountContent() {
     return (
         <View>
             {
-                screen === screens.LOGIN ?
-                    <LoginPage/>
+                screen === screens.ACCOUNT ?
+                    <AccountPage/>
                 :
                 screen === screens.REGISTER ?
                     <RegisterPage/>
                 :
-                    <View>
-                        <Text>
-                            Account
-                        </Text>
-                        <TouchableOpacity onPress={()=>logout()}>
-                            <Text>
-                                Logout
-                            </Text>
-                        </TouchableOpacity>
-                    </View>
+                    <LoginPage/>
             }
         </View>
     )
