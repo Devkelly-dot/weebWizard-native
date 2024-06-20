@@ -1,10 +1,10 @@
 import { ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
 import AnimeCard from "../animeCard/animeCard";
 
-export default function AnimeList({animeList}) {
+export default function AnimeList({animeList, onAnimePress}) {
     const renderGridItems = () => {
         return animeList.map((item, index) => (
-            <TouchableOpacity key={index} style={styles.item}> 
+            <TouchableOpacity key={index} style={styles.item} onPress={()=>onAnimePress(item)}> 
                 <AnimeCard anime={item}/>
             </TouchableOpacity>
         ));
