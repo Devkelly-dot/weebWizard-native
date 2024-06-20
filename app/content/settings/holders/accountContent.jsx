@@ -3,18 +3,14 @@ import { useEffect, useState } from "react";
 import { LoginPage } from "../../loginPage/loginPage";
 import { useSelector } from "react-redux";
 import { useLogin } from "../../../context/loginContext/loginContext";
+import { useSettingsPage } from "../context/settingsPageContext";
+import { RegisterPage } from "../../registerPage/registerPage";
 
-const screens = {
-    LOGIN: 'login',
-    REGISTER: 'register',
-    FORGOT: 'forgot',
-    ACCOUNT: 'account'
-}
 export default function AccountContent() {
     const token = useSelector((state)=>state.auth.token);
     const {logout} = useLogin();
-    const [screen, setScreen] = useState(screens.LOGIN);
-    
+    const {screen, screens, setScreen} = useSettingsPage();
+
     useEffect(()=>{
         if (token) {
             setScreen(screens.ACCOUNT);
@@ -28,6 +24,9 @@ export default function AccountContent() {
             {
                 screen === screens.LOGIN ?
                     <LoginPage/>
+                :
+                screen === screens.REGISTER ?
+                    <RegisterPage/>
                 :
                     <View>
                         <Text>

@@ -14,9 +14,12 @@ export async function authGet(endpoint, token) {
         const url = `${config.api_url}/${endpoint}`;
         const response = await axios.get(url, {headers});
         return response.data;
-    } catch (error) {
-        console.error('Error making authenticated GET request', error);
-        throw error;
+    } catch (e) {
+        if(e.response?.data) {
+            return {
+                error: e.response.data
+            }
+        }
     }
 };
 
@@ -35,6 +38,10 @@ export async function authPost(endpoint, token, body) {
         const response = await axios.post(url, body, {headers});
         return response.data;
     } catch (e) {
-        console.log(e);
+        if(e.response?.data) {
+            return {
+                error: e.response.data
+            }
+        }
     }
 };

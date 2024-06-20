@@ -1,16 +1,17 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Form from "../../../../components/form/form";
 import { useState } from "react";
-import { useLogin } from "../../../../context/loginContext/loginContext";
 import StyledButton from "../../../../components/button/styledButton";
-import RegisterButton from "../registerButton/registerButton";
+import LoginButton from "../loginButton/loginButton";
+import { useRegister } from "../../../../context/registerContext/registerContext";
 
-export default function LoginForm() {
-    const {login} = useLogin();
+export default function RegisterForm() {
+    const {register} = useRegister();
     
     const [form, setForm] = useState({
         email: '',
-        password: ''
+        password: '',
+        confirmPassword: ''
     });
     const [error, setError] = useState(null);
 
@@ -27,20 +28,30 @@ export default function LoginForm() {
             value: form?.password,
             onChange: (v)=>setForm({...form, password: v}),
             secureTextEntry: true
+        },
+        {
+            label: 'Password',
+            field: 'confirmPassword',
+            value: form?.confirmPassword,
+            onChange: (v)=>setForm({...form, confirmPassword: v}),
+            secureTextEntry: true
         }
     ];
     
-    async function attemptLogin() {
+    async function attemptRegister() {
         if(!form.email || !form.password) {
             setError("Please fill out all fields");
             return;
         }
-        const data = await login(form.email?.toLowerCase()?.replace(/\s+/g, ''), form.password);
+        if(form?.password!==form?.confirmPassword) {
+            setError("Passwords do not match");
+        }
+        const data = await register(form.email?.toLowerCase()?.replace(/\s+/g, ''), form.password)
         if(!data?.token) {
             if(data?.error) {
                 setError(data?.error);
             } else {
-                setError("Incorrect Email / Password Combination");
+                setError("Could not register with this email address");
             }
         }
     }
@@ -54,13 +65,13 @@ export default function LoginForm() {
                 error && 
                 <Text style={styles.errorText}>{error}</Text>
             }
-            <View style={styles.loginHolder}>
+            <View style={styles.registerHolder}>
                 <StyledButton
-                    onPress={attemptLogin}
-                    text={"Login"}
+                    onPress={attemptRegister}
+                    text={"Register"}
                 />
             </View>
-            <RegisterButton/>
+            <LoginButton/>
         </View>
     )
 }
@@ -76,7 +87,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         marginVertical: 10,
     },
-    loginHolder: {
+    registerHolder: {
         marginBottom: 10
     }
 })

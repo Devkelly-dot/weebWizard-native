@@ -7,13 +7,11 @@ export default function HomeAnimeList() {
     const { animeList } = useContext(PopularAnimeContext);
 
     return (
-        <ScrollView contentContainerStyle={styles.container}>
-            <View style={styles.gridContainer}>
-                <AnimeList
-                    animeList={animeList}
-                />
-            </View>
-        </ScrollView>
+        <View style={styles.container}>
+            <AnimeList
+                animeList={animeList}
+            />
+        </View>
     );
 }
 

@@ -11,11 +11,9 @@ export default function AnimeList({animeList}) {
     };
 
     return (
-        <ScrollView contentContainerStyle={styles.container}>
-            <View style={styles.gridContainer}>
-                {renderGridItems()}
-            </View>
-        </ScrollView>
+        <View style={styles.gridContainer}>
+            {renderGridItems()}
+        </View>
     )
 }
 
@@ -24,14 +22,14 @@ const styles = StyleSheet.create({
         flexGrow: 1,
         marginVertical: 20,
         paddingHorizontal: 10,
-        height: '100%',
-        paddingBottom: '160%'
     },
     gridContainer: {
         flex: 1,
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'space-between',
+        height: '100%',
+        paddingBottom: '160%'
     },
     item: {
         width: '25%', // Adjust width for the number of columns

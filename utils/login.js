@@ -12,10 +12,18 @@ export async function dispatchLogin (dispatch, user) {
   dispatch(setSubscription(subscription));
 
   // Save to local storage
-  await saveToLocalStorage('token', token);
-  await saveToLocalStorage('id', _id);
-  await saveToLocalStorage('email', email);
-  await saveToLocalStorage('subscription', subscription);
+  if (token) {
+    await saveToLocalStorage('token', token);
+  }
+  if (_id) {
+    await saveToLocalStorage('id', _id);
+  }
+  if (email) {
+    await saveToLocalStorage('email', email);
+  }
+  if (subscription) {
+    await saveToLocalStorage('subscription', subscription);
+  }
 };
 
 export async function dispatchLogout (dispatch) {

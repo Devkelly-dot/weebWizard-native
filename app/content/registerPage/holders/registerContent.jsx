@@ -1,15 +1,14 @@
 import { View, Image, StyleSheet } from "react-native";
-import LoginForm from "../components/loginForm/loginForm";
-import RegisterButton from "../components/registerButton/registerButton";
+import RegisterForm from "../components/registerForm/registerForm";
 
-export default function LoginPageContent() {
+export default function RegisterPageContent() {
     return (
         <View>
             <Image
                 source={require('@/assets/images/crystal-ball.png')}
                 style={styles.reactLogo}
             />
-            <LoginForm/>
+            <RegisterForm/>
         </View>
     )
 }
