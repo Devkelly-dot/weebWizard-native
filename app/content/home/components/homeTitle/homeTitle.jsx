@@ -10,6 +10,10 @@ export default function HomeTitle() {
         router.push('/animeSearch/animeSearch');
     };
 
+    function recommendPress() {
+        router.push('/(tabs)/animeRecommendation');
+    }
+
     return (
         <View style={styles.container}>
             <Text style={styles.title}>
@@ -18,10 +22,17 @@ export default function HomeTitle() {
             </Text>
             <View style={styles.divider}></View>
             <Text style={styles.instructions}>Select An Anime to see where it is Streaming</Text>
-            <StyledButton
-                text={`Search All Anime`}
-                onPress={handleSearchPress}
-            />
+            <View style={styles.buttonsContainer}>
+                <StyledButton
+                    text={`Search All Anime`}
+                    onPress={handleSearchPress}
+                />
+                <StyledButton 
+                    text={`Use WeebWizard AI to find a new anime`}
+                    onPress={recommendPress}
+                    sx={{backgroundColor: '#8e44ad'}}
+                />
+            </View>
         </View>
     );
 }
@@ -53,4 +64,8 @@ const styles = StyleSheet.create({
     instructions: {
         marginBottom: 10,
     },
+    buttonsContainer: {
+        gap: 10,
+        width: '100%'
+    }
 });

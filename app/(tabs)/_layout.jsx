@@ -24,6 +24,15 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="animeRecommendation"
+        options={{
+          title: 'Weeb Wizard AI',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon name={focused ? 'color-wand' : 'color-wand-outline'} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="account"
         options={{
           title: 'Account',

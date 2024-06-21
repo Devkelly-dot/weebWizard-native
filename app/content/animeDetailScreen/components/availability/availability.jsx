@@ -9,7 +9,13 @@ export default function AnimeAvailability({streamingInfo}) {
                 .map((service, index) => (
                     <View key={index} style={styles.streamingService}>
                         <Text style={styles.serviceText}>{service.service}</Text>
-                        <Text style={styles.serviceDetails}>Type: {service.streamingType}</Text>
+                        <Text style={styles.serviceDetails}>
+                            Type: {service.streamingType} {service?.streamingType === 'addon' && service.addon && `(${service.addon?.replace('crunchyrollus', 'Crunchyroll')})`}
+                        </Text>
+                        {
+                            
+                            <Text style={styles.serviceDetails}></Text>
+                        }
                         {service.quality && <Text style={styles.serviceDetails}>Quality: {service.quality}</Text>}
                         {service.price && <Text style={styles.serviceDetails}>Price: {service.price.formatted}</Text>}
                         <TouchableOpacity onPress={() => Linking.openURL(service.link)}>

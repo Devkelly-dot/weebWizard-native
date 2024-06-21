@@ -15,9 +15,10 @@ export default function Form({ fields }) {
                         <TextInput
                             value={f.value}
                             onChangeText={f.onChange}
-                            style={styles.input}
+                            style={{...styles.input, ...f.sx}}
                             placeholder={f.placeholder || ''}
                             secureTextEntry={f.secureTextEntry}
+                            multiline={true}
                         />
                     </View>
                     )}

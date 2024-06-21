@@ -38,7 +38,7 @@ export const AnimeDetailProvider = ({ children, animeId }) => {
         if(animeId) {
             fetchAnimeDetails();
         }
-    }, []);
+    }, [animeId]);
 
     return (
         <AnimeDetailContext.Provider value={{ animeData, animeDetailsLoading, error }}>
