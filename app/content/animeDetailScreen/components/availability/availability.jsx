@@ -4,16 +4,18 @@ export default function AnimeAvailability({streamingInfo}) {
     return (
         <View style={styles.streamingSection}>
             <Text style={styles.streamingTitle}>Available On:</Text>
-            {streamingInfo?.map((service, index) => (
-                <View key={index} style={styles.streamingService}>
-                    <Text style={styles.serviceText}>{service.service}</Text>
-                    <Text style={styles.serviceDetails}>Type: {service.streamingType}</Text>
-                    {service.quality && <Text style={styles.serviceDetails}>Quality: {service.quality}</Text>}
-                    {service.price && <Text style={styles.serviceDetails}>Price: {service.price.formatted}</Text>}
-                    <TouchableOpacity onPress={() => Linking.openURL(service.link)}>
-                        <Text style={styles.serviceLink}>Watch here</Text>
-                    </TouchableOpacity>
-                </View>
+            {streamingInfo
+                ?.sort((a, b) => a.service.localeCompare(b.service))
+                .map((service, index) => (
+                    <View key={index} style={styles.streamingService}>
+                        <Text style={styles.serviceText}>{service.service}</Text>
+                        <Text style={styles.serviceDetails}>Type: {service.streamingType}</Text>
+                        {service.quality && <Text style={styles.serviceDetails}>Quality: {service.quality}</Text>}
+                        {service.price && <Text style={styles.serviceDetails}>Price: {service.price.formatted}</Text>}
+                        <TouchableOpacity onPress={() => Linking.openURL(service.link)}>
+                            <Text style={styles.serviceLink}>Watch here</Text>
+                        </TouchableOpacity>
+                    </View>
             ))}
         </View>
     )

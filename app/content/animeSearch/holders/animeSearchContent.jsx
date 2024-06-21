@@ -8,12 +8,19 @@ export default function AnimeSearchContent() {
     const router = useRouter();
     const { animeSearchResults, query, setQuery, loading, error } = useAnimeSearch();
     const [input, setInput] = useState(query);
+
     const handleSearchPress = () => {
         setQuery(input);
     };
 
+    const handleKeyPress = (event) => {
+        if (event.nativeEvent.key === 'Enter') {
+            handleSearchPress();
+        }
+    };
+
     const renderItem = ({ item }) => (
-        <TouchableOpacity onPress={()=>{router.push(`/anime/${item.myanimelist_id}`)}}>
+        <TouchableOpacity onPress={() => { router.push(`/anime/${item.myanimelist_id}`) }}>
             <View style={styles.itemContainer}>
                 <Image source={{ uri: item.picture_url }} style={styles.image} />
                 <View style={styles.textContainer}>
@@ -32,6 +39,8 @@ export default function AnimeSearchContent() {
                     placeholder="Search for an anime..."
                     value={input}
                     onChangeText={setInput}
+                    onSubmitEditing={handleSearchPress}
+                    onKeyPress={handleKeyPress}
                 />
                 <TouchableOpacity onPress={handleSearchPress} style={styles.searchButton}>
                     <Icon name="search" size={20} color="#000" />
@@ -39,7 +48,13 @@ export default function AnimeSearchContent() {
             </View>
             {loading && query && <ActivityIndicator size="large" color="#0000ff" />}
             {error && <Text style={styles.errorText}>Error: {error.message}</Text>}
-            {!loading && !error && (
+            {!loading && !error && animeSearchResults.length === 0 && query && (
+                <Text style={styles.noResultsText}>No results found.</Text>
+            )}
+            {!loading && !error && animeSearchResults.length === 0 && !query && (
+                <Text style={styles.noResultsText}>Please search for an anime.</Text>
+            )}
+            {!loading && !error && animeSearchResults.length > 0 && (
                 <FlatList
                     data={animeSearchResults}
                     renderItem={renderItem}
@@ -97,5 +112,10 @@ const styles = StyleSheet.create({
     errorText: {
         color: 'red',
         textAlign: 'center',
+    },
+    noResultsText: {
+        textAlign: 'center',
+        fontSize: 16,
+        color: '#333',
     },
 });

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, ScrollView} from "react-native";
+import { StyleSheet, ScrollView, View, Text} from "react-native";
 import { useAnimeDetails } from "../../../context/animeDetailContext/animeDetailContext";
 import { useAnimeAvailability } from '../../../context/animeAvailabilityContext/animeAvailabilityContext';
 import AnimeImage from '../components/image/animeImage';
@@ -16,11 +16,23 @@ export default function AnimeDetailScreen() {
 
     return (
         <ScrollView contentContainerStyle={styles.container}>
-            <AnimeImage animeData={animeData}/>
-            <AnimeTitle animeData={animeData}/>
-            <AnimeSynopsis animeData={animeData}/>
-            <AnimeStatistics animeData={animeData}/>
-            <AnimeAvailability streamingInfo={streamingInfo}/>
+            {
+                animeData? 
+                <>
+                    <AnimeImage animeData={animeData}/>
+                    <AnimeTitle animeData={animeData}/>
+                    <AnimeSynopsis animeData={animeData}/>
+                    <AnimeStatistics animeData={animeData}/>
+                </>
+                :
+                <Text>Loading Anime Data...</Text>
+            }
+            {
+                streamingInfo ? 
+                <AnimeAvailability streamingInfo={streamingInfo}/>
+                :
+                <Text>Loading Streaming Info...</Text>
+            }
         </ScrollView>
     );
 }
@@ -30,5 +42,6 @@ const styles = StyleSheet.create({
         padding: 20,
         backgroundColor: '#f8f9fa',
         alignItems: 'center',
+        minHeight: '100%'
     }
 });

@@ -364,6 +364,7 @@ export const AnimeSearchProvider = ({ children }) => {
     useEffect(() => {
         const searchAnime = async () => {
             try {
+                setLoading(true);
                 const response = await authGet(`v1/anime/search?title=${query}`);
                 // const response = anime_list;
                 const data = response;

@@ -11,6 +11,7 @@ export const AnimeDetailProvider = ({ children, animeId }) => {
     useEffect(() => {
         const fetchAnimeDetails = async () => {
             try {
+                setLoading(true);
                 const response = await authGet(`v1/anime/search/${animeId}`);
                 // const response = {
                 //     "picture_url": "https://cdn.myanimelist.net/images/anime/1032/135088.jpg",
