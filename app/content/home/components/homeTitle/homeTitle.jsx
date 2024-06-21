@@ -1,7 +1,15 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { useRouter } from 'expo-router';
+import StyledButton from '../../../../components/button/styledButton';
 
 export default function HomeTitle() {
+    const router = useRouter();
+
+    const handleSearchPress = () => {
+        router.push('/animeSearch/animeSearch');
+    };
+
     return (
         <View style={styles.container}>
             <Text style={styles.title}>
@@ -9,7 +17,11 @@ export default function HomeTitle() {
                 <Text style={styles.secondPart}>Wizard</Text>
             </Text>
             <View style={styles.divider}></View>
-            <Text>Select An Anime to see where it is Streaming</Text>
+            <Text style={styles.instructions}>Select An Anime to see where it is Streaming</Text>
+            <StyledButton
+                text={`Search All Anime`}
+                onPress={handleSearchPress}
+            />
         </View>
     );
 }
@@ -37,5 +49,8 @@ const styles = StyleSheet.create({
         borderBottomColor: '#ccc', // Color of the divider
         borderBottomWidth: 2, // Thickness of the divider
         width: '80%', // Width of the divider (adjust as needed)
+    },
+    instructions: {
+        marginBottom: 10,
     },
 });
