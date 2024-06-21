@@ -5,7 +5,7 @@ export const AnimeAvailabilityContext = createContext();
 
 export const AnimeAvailabilityProvider = ({ children, animeTitle }) => {
     const [availabilityData, setAvailabilityData] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const [availabilityLoading, setAvailabilityLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
@@ -252,7 +252,7 @@ export const AnimeAvailabilityProvider = ({ children, animeTitle }) => {
                 console.log(err);
                 setError(err);
             } finally {
-                setLoading(false);
+                setAvailabilityLoading(false);
             }
         };
 
@@ -262,7 +262,7 @@ export const AnimeAvailabilityProvider = ({ children, animeTitle }) => {
     }, [animeTitle]);
 
     return (
-        <AnimeAvailabilityContext.Provider value={{ availabilityData, loading, error }}>
+        <AnimeAvailabilityContext.Provider value={{ availabilityData, availabilityLoading, error }}>
             {children}
         </AnimeAvailabilityContext.Provider>
     );

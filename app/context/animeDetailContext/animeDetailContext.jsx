@@ -5,13 +5,13 @@ export const AnimeDetailContext = createContext();
 
 export const AnimeDetailProvider = ({ children, animeId }) => {
     const [animeData, setAnimeData] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const [animeDetailsLoading, setAnimeDetailsLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
         const fetchAnimeDetails = async () => {
             try {
-                setLoading(true);
+                setAnimeDetailsLoading(true);
                 const response = await authGet(`v1/anime/search/${animeId}`);
                 // const response = {
                 //     "picture_url": "https://cdn.myanimelist.net/images/anime/1032/135088.jpg",
@@ -31,7 +31,7 @@ export const AnimeDetailProvider = ({ children, animeId }) => {
             } catch (err) {
                 setError(err);
             } finally {
-                setLoading(false);
+                setAnimeDetailsLoading(false);
             }
         };
 
@@ -41,7 +41,7 @@ export const AnimeDetailProvider = ({ children, animeId }) => {
     }, []);
 
     return (
-        <AnimeDetailContext.Provider value={{ animeData, loading, error }}>
+        <AnimeDetailContext.Provider value={{ animeData, animeDetailsLoading, error }}>
             {children}
         </AnimeDetailContext.Provider>
     );

@@ -9,15 +9,15 @@ import AnimeStatistics from '../components/statistics/statistics';
 import AnimeAvailability from '../components/availability/availability';
 
 export default function AnimeDetailScreen() {
-    const { animeData } = useAnimeDetails();
-    const {availabilityData} = useAnimeAvailability();
+    const { animeData, animeDetailsLoading } = useAnimeDetails();
+    const {availabilityData, availabilityLoading} = useAnimeAvailability();
     const streamingInfo = availabilityData?.streamingInfo?.us;
 
 
     return (
         <ScrollView contentContainerStyle={styles.container}>
             {
-                animeData? 
+                animeData && !animeDetailsLoading? 
                 <>
                     <AnimeImage animeData={animeData}/>
                     <AnimeTitle animeData={animeData}/>
@@ -25,13 +25,19 @@ export default function AnimeDetailScreen() {
                     <AnimeStatistics animeData={animeData}/>
                 </>
                 :
+                animeDetailsLoading ?
                 <Text>Loading Anime Data...</Text>
+                :
+                <Text>Could not get Anime Data</Text>
             }
             {
-                streamingInfo ? 
+                streamingInfo && !availabilityLoading? 
                 <AnimeAvailability streamingInfo={streamingInfo}/>
                 :
+                availabilityLoading?
                 <Text>Loading Streaming Info...</Text>
+                :
+                <Text>Could not get Streaming Info</Text>
             }
         </ScrollView>
     );
