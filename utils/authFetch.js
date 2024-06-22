@@ -40,7 +40,8 @@ export async function authPost(endpoint, token, body) {
     } catch (e) {
         if(e.response?.data) {
             return {
-                error: e.response.data
+                error: e.response.data,
+                status: e.response.status
             }
         }
     }
