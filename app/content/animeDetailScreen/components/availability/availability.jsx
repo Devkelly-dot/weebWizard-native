@@ -18,7 +18,7 @@ export default function AnimeAvailability({streamingInfo}) {
                     <View key={index} style={styles.streamingService}>
                         <Text style={styles.serviceText}>{service.service}</Text>
                         <Text style={styles.serviceDetails}>
-                            Type: {service.streamingType} {service?.streamingType === 'addon' && service.addon && `(${formatAddon(service.addon)}`}
+                            Type: {service.streamingType} {service?.streamingType === 'addon' && service.addon && `(${formatAddon(service.addon)})`}
                         </Text>
                         {
                             
