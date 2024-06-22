@@ -21,7 +21,8 @@ export const AnimeRecommendationsProvider = ({ children, animeName }) => {
             const response = await authPost(`v1/recommendations`, token, animeRecommendationsForm);
             if(response?.error) {
                 if(response?.status === 401) {
-                    setError("Please login to use the AI");
+                    console.log(response);
+                    setError(response?.error?.message?response.error.message:response?.error);
                 } else {
                     if(response?.error?.message) {
                         setError(response?.error?.message);
