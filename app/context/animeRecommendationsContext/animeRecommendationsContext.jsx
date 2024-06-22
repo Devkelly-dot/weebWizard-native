@@ -19,12 +19,10 @@ export const AnimeRecommendationsProvider = ({ children, animeName }) => {
         try {
             setAnimeRecommendationsLoading(true);
             const response = await authPost(`v1/recommendations`, token, animeRecommendationsForm);
-            console.log(response);
             if(response?.error) {
                 if(response?.status === 401) {
                     setError("Please login to use the AI");
                 } else {
-                    console.log("ERROR MESSAGE: ", response?.error);
                     if(response?.error?.message) {
                         setError(response?.error?.message);
                     } else if(typeof response?.error === 'string') {
@@ -32,12 +30,10 @@ export const AnimeRecommendationsProvider = ({ children, animeName }) => {
                     }
                 }
             } else {
-                console.log(response);
                 setAnimeRecommendations(response);
                 setError(null);
             }
         } catch (err) {
-            console.log(err);
             setError(err);
         } finally {
             setAnimeRecommendationsLoading(false);
@@ -48,7 +44,7 @@ export const AnimeRecommendationsProvider = ({ children, animeName }) => {
         <AnimeRecommendationsContext.Provider 
             value={{ 
                 animeRecommendationsForm, setAnimeRecommendationsForm, getAnimeRecommendations, 
-                animeRecommendations, animeRecommendationsLoading, error, setError
+                animeRecommendations, setAnimeRecommendations, animeRecommendationsLoading, error, setError
             }}
         >
             {children}
