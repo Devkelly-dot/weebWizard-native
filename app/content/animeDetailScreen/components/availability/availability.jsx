@@ -1,6 +1,14 @@
 import { Linking, StyleSheet, Text, TouchableOpacity, View } from "react-native"
 
 export default function AnimeAvailability({streamingInfo}) {
+    function formatAddon(addon) {
+        if(addon === 'crunchyrollus') {
+            return 'Crunchyroll'
+        } else if(addon === 'hidiveus') {
+            return 'HIDIVE'
+        }
+    }
+
     return (
         <View style={styles.streamingSection}>
             <Text style={styles.streamingTitle}>Available On:</Text>
@@ -10,7 +18,7 @@ export default function AnimeAvailability({streamingInfo}) {
                     <View key={index} style={styles.streamingService}>
                         <Text style={styles.serviceText}>{service.service}</Text>
                         <Text style={styles.serviceDetails}>
-                            Type: {service.streamingType} {service?.streamingType === 'addon' && service.addon && `(${service.addon?.replace('crunchyrollus', 'Crunchyroll')})`}
+                            Type: {service.streamingType} {service?.streamingType === 'addon' && service.addon && `(${formatAddon(service.addon)})`}
                         </Text>
                         {
                             

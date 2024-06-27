@@ -18,3 +18,16 @@ export async function deleteFromLocalStorage (key) {
     console.error('Error deleting from local storage', error);
   }
 };
+
+export async function getFromLocalStorage(key) {
+  try {
+    const value = await AsyncStorage.getItem(key);
+    if (value !== null) {
+      return value;
+    }
+    return null; // Return null if the item does not exist
+  } catch (error) {
+    console.error('Error retrieving from local storage', error);
+    return null;
+  }
+};

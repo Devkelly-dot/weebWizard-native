@@ -18,7 +18,7 @@ export default function Form({ fields }) {
                             style={{...styles.input, ...f.sx}}
                             placeholder={f.placeholder || ''}
                             secureTextEntry={f.secureTextEntry}
-                            multiline={true}
+                            multiline={f.multiline}
                         />
                     </View>
                     )}
