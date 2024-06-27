@@ -27,6 +27,7 @@ export default function StackLayout() {
             <Stack.Screen name="animePreSearch/[query]" options={{ headerShown: false }}  />
             <Stack.Screen name="animeSearch/animeSearch" options={{ headerShown: false }}  />
             <Stack.Screen name="animeRecommendation/animeRecommendation" options={{ headerShown: false }}  />
+            <Stack.Screen name="pricing/pricing" options={{ headerShown: false }}  />
         </Stack>
     )
 }

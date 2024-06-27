@@ -4,10 +4,17 @@ import { useAccount } from "../../../context/accountContext/accountContext";
 import { useLogin } from "../../../context/loginContext/loginContext";
 import { FontAwesome } from '@expo/vector-icons';
 import StyledButton from '../../../components/button/styledButton';
+import StyledButtonText from '../../../components/button/styledButtonText';
+import { useRouter } from 'expo-router';
 
 export default function AccountContent() {
     const { account } = useAccount();
     const { logout } = useLogin();
+    const router = useRouter();
+
+    function routeToPricing() {
+        router.push('/pricing/pricing')
+    }
 
     return (
         <View style={styles.container}>
@@ -19,6 +26,9 @@ export default function AccountContent() {
                 text={'Logout'}
                 onPress={logout}
             />
+            <View style={styles.buttonRow}>
+                <StyledButtonText text={'Subscribe'} onPress={routeToPricing} textSx={{fontSize: 20}}/>
+            </View>
         </View>
     );
 }
@@ -42,5 +52,13 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         color: '#333',
-    }
+    },
+    buttonRow: {
+        position: 'absolute',
+        bottom: 20,
+        flexDirection: 'row-reverse',
+        justifyContent: 'space-between',
+        width: '100%',
+        paddingHorizontal: 20,
+    },
 });

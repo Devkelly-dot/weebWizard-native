@@ -1,9 +1,9 @@
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 
-export default function StyledButtonText({text, onPress}) {
+export default function StyledButtonText({text, onPress, textSx}) {
     return (
         <TouchableOpacity onPress={onPress}>
-            <Text style={styles.button}>{text}</Text>
+            <Text style={{...styles.button, ...textSx}}>{text}</Text>
         </TouchableOpacity>
     )
 }
