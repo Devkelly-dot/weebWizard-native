@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { LinearGradient } from 'expo-linear-gradient';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { useRouter } from "expo-router";
+import PricingCard from "../../../components/pricingCard/pricingCard";
 
 export default function PricingContent() {
     const router = useRouter();
@@ -63,25 +64,6 @@ export default function PricingContent() {
         }
     }
 
-
-    const PlanDetails = ({ plan }) => (
-        <>
-            <Text style={styles.planTitle}>{plan.displayName}</Text>
-            <Text style={styles.planDescription}>{plan.includes.length}</Text>
-            <Text style={styles.planDetails}>Max Prompt Size: {plan.includes.max_prompt_size}</Text>
-            <Text style={styles.planDetails}>Max Tokens: {plan.includes.max_tokens}</Text>
-            <Text style={styles.planDetails}>Suggestion Requests: {plan.includes.suggestion_requests}</Text>
-            <Text style={styles.planDetails}>Suggestions Returned: {plan.includes.suggestions_returned}</Text>
-            {plan.price_monthly && (
-                <StyledButton
-                    text={"Purchase Plan"}
-                    onPress={openPaymentSheet}
-                    style={styles.button}
-                />
-            )}
-        </>
-    );
-
     return (
         <ParallaxScrollView
             headerBackgroundColor={{ light: '#e5e4ff', dark: '#e5e4ff' }}
@@ -92,34 +74,21 @@ export default function PricingContent() {
                 />
             }
         >
-        <View style={styles.container}>
-            <Text style={styles.header}>Pricing</Text>
-            {
-                !intentData && !error ? 
-                <Text>Loading...</Text> :
-                <View style={styles.plansContainer}>
-                    {subscriptionPlans.map(plan => (
-                        <View key={plan._id} style={[
-                            styles.planCard, 
-                            plan.title === "premium" && styles.premiumCard
-                        ]}>
-                            {plan.title === "premium" ? (
-                                <LinearGradient
-                                    colors={['#ff8a00', '#e52e71']}
-                                    style={styles.gradientBorder}
-                                >
-                                    <View style={styles.planCardInner}>
-                                        <PlanDetails plan={plan} />
-                                    </View>
-                                </LinearGradient>
-                            ) : (
-                                <PlanDetails plan={plan} />
-                            )}
-                        </View>
-                    ))}
-                </View>
-            }
-        </View>
+            <View style={styles.container}>
+                <Text style={styles.header}>Pricing</Text>
+                {
+                    !intentData && !error ? 
+                    <Text>Loading...</Text> :
+                    <View style={styles.plansContainer}>
+                        {subscriptionPlans.map(plan => (
+                            <PricingCard
+                                plan={plan}
+                                onSubscribePress={()=>plan.title === "premium"&&openPaymentSheet()}
+                            />
+                        ))}
+                    </View>
+                }
+            </View>
         </ParallaxScrollView>
     );
 }
@@ -136,46 +105,6 @@ const styles = StyleSheet.create({
     plansContainer: {
         flexDirection: 'column',
         justifyContent: 'space-around',
-    },
-    planCard: {
-        width: '100%',
-        padding: 15,
-        marginBottom: 20,
-        borderRadius: 10,
-        backgroundColor: '#f8f8f8',
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.1,
-        shadowRadius: 5,
-    },
-    premiumCard: {
-        padding: 0,
-        borderRadius: 10,
-    },
-    gradientBorder: {
-        borderRadius: 10,
-        padding: 2,
-    },
-    planCardInner: {
-        borderRadius: 10,
-        backgroundColor: '#fff',
-        padding: 15,
-    },
-    planTitle: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        marginBottom: 10,
-    },
-    planDescription: {
-        fontSize: 14,
-        marginBottom: 10,
-    },
-    planDetails: {
-        fontSize: 12,
-        marginBottom: 5,
-    },
-    button: {
-        marginTop: 10,
     },
     reactLogo: {
       height: '100%',
