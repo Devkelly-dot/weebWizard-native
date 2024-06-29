@@ -2,7 +2,7 @@ import { StyleSheet, Text, TouchableOpacity } from "react-native";
 
 export default function StyledButton({text, onPress, disabled, sx}) {
     return (
-        <TouchableOpacity onPress={onPress} style={{...styles.button, ...sx}} disabled={disabled}>
+        <TouchableOpacity onPress={onPress} style={{...styles.button, ...sx, opacity: disabled?0.5:1}} disabled={disabled}>
             <Text style={styles.buttonText}>{text}</Text>
         </TouchableOpacity>
     )
@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
       shadowOpacity: 0.8,
       shadowRadius: 2,
       elevation: 5,
+      opacity: 0.5
     },
     buttonText: {
       color: '#fff',

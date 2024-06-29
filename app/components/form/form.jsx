@@ -22,6 +22,14 @@ export default function Form({ fields }) {
                         />
                     </View>
                     )}
+                    {
+                        f?.max_length &&
+                        <View>
+                            <Text style={{...styles.maxLength, color:f.value.length > f.max_length && 'red' }}>
+                                {`${f.value?.length} / ${f.max_length}`}
+                            </Text>
+                        </View>
+                    }
                 </View>
                 );
             })}
@@ -36,9 +44,6 @@ const styles = StyleSheet.create({
     fieldContainer: {
         marginBottom: 20,
     },
-    inputContainer: {
-        marginBottom: 10,
-    },
     label: {
         fontSize: 16,
         fontWeight: 'bold',
@@ -51,4 +56,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         paddingHorizontal: 10,
     },
+    maxLength: {
+
+    }
 });

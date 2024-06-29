@@ -14,7 +14,6 @@ export function SubscribeProvider ({ children }) {
             const data = await fetchSubscriptionPlans();
             if(data?.subscriptionPlans) {
                 setSubscriptionPlans(data.subscriptionPlans);
-                console.log("plans: ", data.subscriptionPlans)
             }
         }
 

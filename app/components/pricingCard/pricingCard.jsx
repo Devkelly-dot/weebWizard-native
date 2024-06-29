@@ -2,7 +2,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { StyleSheet, View } from "react-native";
 import PlanDetails from "./components/planDetails";
 
-export default function PricingCard({plan, onSubscribePress}) {
+export default function PricingCard({plan, onSubscribePress, canPurchase}) {
     return (
         <View style={[
             styles.planCard, 
@@ -14,7 +14,7 @@ export default function PricingCard({plan, onSubscribePress}) {
                     style={styles.gradientBorder}
                 >
                     <View style={styles.planCardInner}>
-                        <PlanDetails plan={plan} onSubscribePress={onSubscribePress}/>
+                        <PlanDetails plan={plan} onSubscribePress={onSubscribePress} canPurchase={canPurchase}/>
                     </View>
                 </LinearGradient>
             ) : (

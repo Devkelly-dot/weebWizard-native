@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import StyledButton from "../../button/styledButton";
 import PlanFeature from "./planFeature";
 
-export default function PlanDetails({plan, onSubscribePress}) {
+export default function PlanDetails({plan, onSubscribePress, canPurchase}) {
     function formatPrice(price) {
         const dollars = price / 100;
         return `$${dollars.toFixed(2)}`;
@@ -64,6 +64,7 @@ export default function PlanDetails({plan, onSubscribePress}) {
                     text={"Purchase Plan"}
                     onPress={onSubscribePress}
                     sx={styles.button}
+                    disabled={!canPurchase}
                 />
             )}
         </View>

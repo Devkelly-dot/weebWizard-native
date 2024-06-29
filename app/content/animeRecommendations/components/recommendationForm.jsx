@@ -74,11 +74,27 @@ export default function RecommendationForm() {
             onChange: (v) => setAnimeRecommendationsForm({ ...animeRecommendationsForm, reason: v }),
             sx: { minHeight: 100, marginBottom: 100 },
             multiline: true,
-            placeholder: placeholderText // Set the placeholder dynamically
+            placeholder: placeholderText,
+            max_length: subscriptionData?.subscriptionPlan?.includes?.max_prompt_size
         }
     ];
 
     async function attemptGetRecommendations() {
+        let too_long = false;
+        fields?.forEach((f)=>{
+            if(f.value?.length > f?.max_length ) {
+                too_long = true;
+                setError(`Please keep your prompt under ${subscriptionData?.max_length} characters`);
+                return;
+            }
+        });
+
+        if(too_long) {
+            setError(`Please keep your prompt under ${subscriptionData?.max_length} characters`);
+            return;
+        } else {
+            setError('')
+        }
         if (animeRecommendationsForm?.reason) {
             await getAnimeRecommendations();
         } else {

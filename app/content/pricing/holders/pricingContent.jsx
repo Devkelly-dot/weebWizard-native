@@ -15,26 +15,22 @@ export default function PricingContent() {
     const { initPaymentSheet, presentPaymentSheet } = useStripe();
     const { createPaymentIntent, intentData, subscriptionPlans } = useSubscribe();
     const [error, setError] = useState(null);
-
-    useEffect(() => {
-        async function initializePaymentIntent() {
-            const data = await createPaymentIntent();
-            if (data?.error) {
-                setError(data.error);
-            }
-        }
-
-        if (token) {
-            initializePaymentIntent();
-        }
-    }, [token]);
+    const [purchasedPressed, setPurchasedPressed] = useState(false);
 
     useEffect(() => {
         if (intentData) {
-            console.log("INITIALIZING");
             initializePaymentSheet();
         }
     }, [intentData]);
+
+    
+    async function initializePaymentIntent(plan) {
+        const data = await createPaymentIntent(plan._id);
+        if (data?.error) {
+            setError(data.error);
+            setPurchasedPressed(false);
+        }
+    }
 
     async function initializePaymentSheet() {
         const { error } = await initPaymentSheet({
@@ -50,8 +46,16 @@ export default function PricingContent() {
         if (error) {
             console.log("ERROR: ", error);
             setError(error.message);
+            setPurchasedPressed(false);
+        } else {
+            openPaymentSheet();
         }
     };
+
+    async function onPurchaseClick(plan) {
+        setPurchasedPressed(true);
+        const intentData = await initializePaymentIntent(plan);
+    }
 
     async function openPaymentSheet() {
         const data = await presentPaymentSheet();
@@ -59,11 +63,11 @@ export default function PricingContent() {
         if (data?.error) {
             const error = data.error;
             Alert.alert(`Error code: ${error.code}`, error.message);
+            setPurchasedPressed(false);
         } else {
             router.replace('/(tabs)/account')
         }
     }
-
     return (
         <ParallaxScrollView
             headerBackgroundColor={{ light: '#e5e4ff', dark: '#e5e4ff' }}
@@ -77,13 +81,14 @@ export default function PricingContent() {
             <View style={styles.container}>
                 <Text style={styles.header}>Pricing</Text>
                 {
-                    !intentData && !error ? 
+                    !subscriptionPlans ? 
                     <Text>Loading...</Text> :
                     <View style={styles.plansContainer}>
                         {subscriptionPlans.map(plan => (
                             <PricingCard
                                 plan={plan}
-                                onSubscribePress={()=>plan.title === "premium"&&openPaymentSheet()}
+                                onSubscribePress={()=>plan.title === "premium"&&!purchasedPressed&&onPurchaseClick(plan)}
+                                canPurchase={!purchasedPressed}
                             />
                         ))}
                     </View>
