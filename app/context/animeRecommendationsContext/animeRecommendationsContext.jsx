@@ -1,14 +1,16 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import { authPost } from '../../../utils/authFetch';
 import { useSelector } from 'react-redux';
+import { useLocalSearchParams } from 'expo-router';
 
 export const AnimeRecommendationsContext = createContext();
 
 export const AnimeRecommendationsProvider = ({ children, animeName }) => {
+    const { name } = useLocalSearchParams();
     const token = useSelector((state)=>state.auth.token);
 
     const [animeRecommendationsForm, setAnimeRecommendationsForm] = useState({
-        title: '',
+        title: name?name:'',
         reason: ''
     })
     const [animeRecommendations, setAnimeRecommendations] = useState(null);

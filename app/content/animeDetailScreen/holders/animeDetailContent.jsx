@@ -7,8 +7,11 @@ import AnimeTitle from '../components/title/animeTitle';
 import AnimeSynopsis from '../components/synopsis/synopsis';
 import AnimeStatistics from '../components/statistics/statistics';
 import AnimeAvailability from '../components/availability/availability';
+import StyledButton from '../../../components/button/styledButton';
+import { useRouter } from 'expo-router';
 
 export default function AnimeDetailScreen() {
+    const router = useRouter();
     const { animeData, animeDetailsLoading } = useAnimeDetails();
     const {availabilityData, availabilityLoading} = useAnimeAvailability();
     const streamingInfo = availabilityData?.streamingInfo?.us;
@@ -21,6 +24,13 @@ export default function AnimeDetailScreen() {
                 <>
                     <AnimeImage animeData={animeData}/>
                     <AnimeTitle animeData={animeData}/>
+                    <View>
+                        <StyledButton
+                            sx={{ backgroundColor: '#8e44ad', marginBottom: 10 }}
+                            text={"Suggest Anime Like This"}
+                            onPress={() => router.push(`animeRecommendation/${animeData?.title_en?animeData.title_en:animeData.title_ov}`)}
+                        />
+                    </View>
                     <AnimeSynopsis animeData={animeData}/>
                     <AnimeStatistics animeData={animeData}/>
                 </>
