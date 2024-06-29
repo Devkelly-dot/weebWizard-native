@@ -30,7 +30,7 @@ export function SubscriptionProvider ({ children }) {
 
     async function toggleAutoRenewal(ar) {
         let autoRenew = true;
-        if(!autoRenew) {
+        if(!ar) {
             autoRenew = false;
         }
 

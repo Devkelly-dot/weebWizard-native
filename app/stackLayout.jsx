@@ -28,6 +28,7 @@ export default function StackLayout() {
             <Stack.Screen name="animeSearch/animeSearch" options={{ headerShown: false }}  />
             <Stack.Screen name="animeRecommendation/animeRecommendation" options={{ headerShown: false }}  />
             <Stack.Screen name="pricing/pricing" options={{ headerShown: false }}  />
+            <Stack.Screen name="manageSubscription/manageSubscription" options={{ headerShown: false }}  />
         </Stack>
     )
 }

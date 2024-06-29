@@ -1,5 +1,5 @@
-import { createContext, useContext, useState } from 'react';
-import { authPost } from '../../../utils/authFetch';
+import { createContext, useContext, useEffect, useState } from 'react';
+import { authGet, authPost } from '../../../utils/authFetch';
 import { useSelector } from 'react-redux';
 
 const SubscribeContext = createContext();
@@ -8,6 +8,20 @@ export function SubscribeProvider ({ children }) {
     const token = useSelector((state)=>state.auth.token);
     const [intentData, setIntentData] = useState(null);
     const [subscriptionPlans, setSubscriptionPlans] = useState(null);
+
+    useEffect(()=>{
+        async function fetchAndSetSubscriptionPlans() {
+            const data = await fetchSubscriptionPlans();
+            if(data?.subscriptionPlans) {
+                setSubscriptionPlans(data.subscriptionPlans);
+                console.log("plans: ", data.subscriptionPlans)
+            }
+        }
+
+        if(token) {
+            fetchAndSetSubscriptionPlans()
+        }
+    }, []);
 
     async function createPaymentIntent(intentPlan) {
         if(token) {
@@ -29,7 +43,8 @@ export function SubscribeProvider ({ children }) {
     };
 
     async function fetchSubscriptionPlans() {
-
+        const res = await authGet('v1/subscription/plans', null);
+        return res;
     }
 
     return (

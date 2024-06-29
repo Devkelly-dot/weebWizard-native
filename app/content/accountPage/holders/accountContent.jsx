@@ -13,7 +13,7 @@ export default function AccountContent() {
     const router = useRouter();
 
     function routeToPricing() {
-        router.push('/pricing/pricing')
+        router.push('/manageSubscription/manageSubscription')
     }
 
     return (
@@ -27,7 +27,7 @@ export default function AccountContent() {
                 onPress={logout}
             />
             <View style={styles.buttonRow}>
-                <StyledButtonText text={'Subscribe'} onPress={routeToPricing} textSx={{fontSize: 20}}/>
+                <StyledButtonText text={'Manage Subscription'} onPress={routeToPricing} textSx={{fontSize: 20}}/>
             </View>
         </View>
     );
