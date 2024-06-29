@@ -7,10 +7,11 @@ const SubscribeContext = createContext();
 export function SubscribeProvider ({ children }) {
     const token = useSelector((state)=>state.auth.token);
     const [intentData, setIntentData] = useState(null);
+    const [subscriptionPlans, setSubscriptionPlans] = useState(null);
 
     async function createPaymentIntent(intentPlan) {
         if(token) {
-            intentPlan = '664ea53e1ed349e33ed72806';
+            intentPlan = '667efe424df1086f7abfaba5';
             const data = await authPost('v1/stripe/payment-intent', token, {intentPlan});
             
             if (data?.intentData) {
@@ -27,8 +28,12 @@ export function SubscribeProvider ({ children }) {
         }
     };
 
+    async function fetchSubscriptionPlans() {
+
+    }
+
     return (
-        <SubscribeContext.Provider value={{ createPaymentIntent, intentData }}>
+        <SubscribeContext.Provider value={{ createPaymentIntent, intentData, subscriptionPlans }}>
             {children}
         </SubscribeContext.Provider>
     );

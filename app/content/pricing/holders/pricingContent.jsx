@@ -1,14 +1,23 @@
 import { Alert, Text, View } from "react-native";
 import { useSubscribe } from "../../../context/subscribeContext/subscribeContext";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useStripe } from "@stripe/stripe-react-native";
 
 export default function PricingContent() {
     const { initPaymentSheet, presentPaymentSheet } = useStripe();
     const {createPaymentIntent, intentData} = useSubscribe();
+    const [error, setError] = useState(null);
 
     useEffect(()=>{
-        createPaymentIntent();
+        async function initializePaymentIntent() {
+            const data = await createPaymentIntent();
+            if(data?.error) {
+                console.log(data.error);
+                setError(data.error);
+            }
+        }
+
+        initializePaymentIntent();
     }, []);
 
     useEffect(() => {
@@ -45,7 +54,7 @@ export default function PricingContent() {
         <View>
             <Text>Pricing</Text>
             {
-                !intentData ? 
+                !intentData && !error? 
                 <Text>Loading...</Text>
                 :
                 <View>
