@@ -20,7 +20,6 @@ export default function RecommendationResults() {
                 const anime = animeRecommendations?.recommendations[i];
                 const title = anime.title;
 
-                console.log("title: ", title);
                 const response = await authGet(`v1/anime/search?title=${title}`);
                 const first_anime = response[0];
                 recDetailedList.push({...first_anime, title: anime?.title, reason: anime?.reason});

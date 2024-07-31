@@ -6,9 +6,9 @@ export default function PricingCard({plan, onSubscribePress, canPurchase}) {
     return (
         <View style={[
             styles.planCard, 
-            plan.title === "premium" && styles.premiumCard
+            plan?.title === "premium" && styles.premiumCard
         ]}>
-            {plan.title === "premium" ? (
+            {plan?.title === "premium" ? (
                 <LinearGradient
                     colors={['#ff8a00', '#e52e71']}
                     style={styles.gradientBorder}

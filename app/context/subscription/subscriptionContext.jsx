@@ -21,7 +21,8 @@ export function SubscriptionProvider ({ children }) {
 
     async function fetchSubscriptionData() {
         const data = await authGet('v1/subscription', token);
-        
+        console.log("============ DATAAA ===================");
+        console.log(data);
         if (data?.intentData) {
             setIntentData(data);
         } 

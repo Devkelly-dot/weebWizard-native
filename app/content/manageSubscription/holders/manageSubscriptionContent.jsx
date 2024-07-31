@@ -10,9 +10,17 @@ const SubscriptionManagement = () => {
 
     if (!subscriptionData) {
         return <Text style={styles.loadingText}>Loading...</Text>; // or any other loading indicator
+    } 
+
+    let subscriptionPlan, currentPeriodEnd, isRenewing, suggestion_requests = null;
+    
+    if(subscriptionData) {
+        subscriptionPlan = subscriptionData.subscriptionPlan;
+        currentPeriodEnd = subscriptionData.currentPeriodEnd;
+        isRenewing = subscriptionData.isRenewing;
+        suggestion_requests = subscriptionData.suggestion_requests;
     }
 
-    const { subscriptionPlan, currentPeriodEnd, isRenewing, suggestion_requests } = subscriptionData;
     const endDate = new Date(currentPeriodEnd * 1000).toLocaleDateString();
 
     const handleRenewalToggle = () => {
@@ -35,13 +43,13 @@ const SubscriptionManagement = () => {
         >
             <View style={styles.container}>
                 <View style={styles.card}>
-                    <Text style={styles.title}>{subscriptionPlan.displayName} Plan</Text>
+                    <Text style={styles.title}>{subscriptionPlan?.displayName} Plan</Text>
                     <View style={styles.infoContainer}>
                         <Text style={styles.infoText}>{`${isRenewing?"Renews":"Ends"} on ${endDate}`}</Text>
-                        <Text style={styles.infoText}>{`Anime Suggestions: ${suggestion_requests}/${subscriptionPlan.includes.suggestion_requests}`}</Text>
+                        <Text style={styles.infoText}>{`Anime Suggestions: ${suggestion_requests}/${subscriptionPlan?.includes.suggestion_requests}`}</Text>
                     </View>
                     {
-                        subscriptionPlan.title!=='free' ?
+                        subscriptionPlan?.title!=='free' ?
                         <TouchableOpacity
                             style={isRenewing ? styles.buttonOff : styles.buttonOn}
                             onPress={handleRenewalToggle}

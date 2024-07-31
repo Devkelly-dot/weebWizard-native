@@ -25,7 +25,8 @@ export default function PricingContent() {
 
     
     async function initializePaymentIntent(plan) {
-        const data = await createPaymentIntent(plan._id);
+
+        const data = await createPaymentIntent(plan);
         if (data?.error) {
             setError(data.error);
             setPurchasedPressed(false);
@@ -44,7 +45,6 @@ export default function PricingContent() {
         });
 
         if (error) {
-            console.log("ERROR: ", error);
             setError(error.message);
             setPurchasedPressed(false);
         } else {
@@ -68,6 +68,7 @@ export default function PricingContent() {
             router.replace('/(tabs)/account')
         }
     }
+
     return (
         <ParallaxScrollView
             headerBackgroundColor={{ light: '#e5e4ff', dark: '#e5e4ff' }}
@@ -87,7 +88,7 @@ export default function PricingContent() {
                         {subscriptionPlans.map(plan => (
                             <PricingCard
                                 plan={plan}
-                                onSubscribePress={()=>plan.title === "premium"&&!purchasedPressed&&onPurchaseClick(plan)}
+                                onSubscribePress={()=>plan?.title === "premium"&&!purchasedPressed&&onPurchaseClick(plan)}
                                 canPurchase={!purchasedPressed}
                             />
                         ))}

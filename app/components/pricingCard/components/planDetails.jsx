@@ -8,23 +8,22 @@ export default function PlanDetails({plan, onSubscribePress, canPurchase}) {
         return `$${dollars.toFixed(2)}`;
     }
 
-    console.log(plan);
 
     const features = [
         {
-            name: `${plan.title==='free'?'Short and minimalist':'Long and descriptive'} AI`,
+            name: `${plan?.title==='free'?'Short and minimalist':'Long and descriptive'} AI`,
         },
         {
-            name: `${plan.includes.max_prompt_size} character prompt size`,
+            name: `${plan?.includes.max_prompt_size} character prompt size`,
         },
         {
-            name: `${plan.includes.max_tokens} token limit for the AI's response`,
+            name: `${plan?.includes.max_tokens} token limit for the AI's response`,
         },
         {
-            name: `${plan.includes.suggestion_requests} daily AI suggestions`,
+            name: `${plan?.includes.suggestion_requests} daily AI suggestions`,
         },
         {
-            name: `Up to ${plan.includes.suggestions_returned} recommendations returned per suggestion`
+            name: `Up to ${plan?.includes.suggestions_returned} recommendations returned per suggestion`
         },
         {
             name: 'Browse Anime'
@@ -37,12 +36,12 @@ export default function PlanDetails({plan, onSubscribePress, canPurchase}) {
         <View>
             <View style={styles.cardTitle}>
                 <Text style={styles.planTitle}>
-                    {plan.displayName}
+                    {plan?.displayName}
                 </Text>
                 {
-                    plan.display_price_monthly && 
+                    plan?.display_price_monthly && 
                     <Text style={styles.planTitle}>
-                        {`${formatPrice(plan.display_price_monthly)}`}
+                        {`${formatPrice(plan?.display_price_monthly)}`}
                         <Text style={styles.smallerText}>/month</Text>
                     </Text>
                 }
@@ -59,7 +58,7 @@ export default function PlanDetails({plan, onSubscribePress, canPurchase}) {
                     })
                 }
             </View>
-            {plan.price_monthly && (
+            {plan?.price_monthly && (
                 <StyledButton
                     text={"Purchase Plan"}
                     onPress={onSubscribePress}

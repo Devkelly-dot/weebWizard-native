@@ -13,7 +13,7 @@ export function SubscribeProvider ({ children }) {
         async function fetchAndSetSubscriptionPlans() {
             const data = await fetchSubscriptionPlans();
             if(data?.subscriptionPlans) {
-                setSubscriptionPlans(data.subscriptionPlans);
+                setSubscriptionPlans(data?.subscriptionPlans);
             }
         }
 
@@ -24,13 +24,16 @@ export function SubscribeProvider ({ children }) {
 
     async function createPaymentIntent(intentPlan) {
         if(token) {
-            intentPlan = '667efe424df1086f7abfaba5';
-            const data = await authPost('v1/stripe/payment-intent', token, {intentPlan});
-            
-            if (data?.intentData) {
-                setIntentData(data);
-            } 
-            return data;
+            try {
+                intentPlan = intentPlan?._id;
+                const data = await authPost('v1/stripe/payment-intent', token, {intentPlan: intentPlan});
+                if (data?.intentData) {
+                    setIntentData(data);
+                } 
+                return data;
+            } catch (e) {
+                console.log(e);
+            }
         } else {
             return {
                 error: {

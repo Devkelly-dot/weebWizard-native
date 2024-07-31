@@ -23,7 +23,6 @@ export const AnimeRecommendationsProvider = ({ children, animeName }) => {
             const response = await authPost(`v1/recommendations`, token, animeRecommendationsForm);
             if(response?.error) {
                 if(response?.status === 401) {
-                    console.log(response);
                     setError(response?.error?.message?response.error.message:response?.error);
                 } else {
                     if(response?.error?.message) {
