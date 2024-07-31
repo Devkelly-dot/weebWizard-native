@@ -74,7 +74,7 @@ export default function PricingContent() {
             headerBackgroundColor={{ light: '#e5e4ff', dark: '#e5e4ff' }}
             headerImage={
                 <Image
-                    source={require('@/assets/images/hero.png')}
+                    source={{uri: 'https://lh3.googleusercontent.com/drive-viewer/AKGpihYkLDakFxVCYhJJwPoOl26sj1O_AqIjMXtZk_eYm9Bk11CfoEoaUzyVkc39fTMlkfT6kRVhUm7CoZOnJif0yYubzluqB2tvpEI=s1600-rw-v1'}}
                     style={styles.reactLogo}
                 />
             }

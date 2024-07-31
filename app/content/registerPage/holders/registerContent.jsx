@@ -5,7 +5,7 @@ export default function RegisterPageContent() {
     return (
         <View>
             <Image
-                source={require('@/assets/images/crystal-ball.png')}
+                source={{uri: 'https://lh3.googleusercontent.com/drive-viewer/AKGpihbqyB4JUmCt7ULSeEkh0ePR5G-hs72qKX7vyg4zWJ5zY4IP-W827I12D0u5zbSpzMxYkXIoXXMLxuxA2lg9e-Sz-YeMXuFMFzU=s1600-rw-v1'}}
                 style={styles.reactLogo}
             />
             <RegisterForm/>

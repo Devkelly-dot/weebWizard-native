@@ -1,4 +1,7 @@
-import { Linking, StyleSheet, Text, TouchableOpacity, View } from "react-native"
+import { Image, Linking, StyleSheet, Text, TouchableOpacity, View } from "react-native"
+import DefaultImage from './images/Hulu-logo.png';
+import { image_mapper } from "./images/imageMapper";
+const DEFAULT_IMAGE = Image.resolveAssetSource(DefaultImage).uri;
 
 export default function AnimeAvailability({streamingInfo}) {
     function formatAddon(addon) {
@@ -8,15 +11,34 @@ export default function AnimeAvailability({streamingInfo}) {
             return 'HIDIVE'
         }
     }
+    
+    const uniqueStreamingInfo = streamingInfo
+    ?.reduce((acc, service) => {
+        const key = `${service.service}-${service.addon || service.type}`;
+        if (!acc.keys.has(key)) {
+            acc.keys.add(key);
+            acc.result.push(service);
+        }
+        return acc;
+    }, { keys: new Set(), result: [] })
+    .result
+    .sort((a, b) => a.service.localeCompare(b.service));
 
     return (
         <View style={styles.streamingSection}>
             <Text style={styles.streamingTitle}>Available On:</Text>
-            {streamingInfo
-                ?.sort((a, b) => a.service.localeCompare(b.service))
+            {uniqueStreamingInfo
                 .map((service, index) => (
                     <View key={index} style={styles.streamingService}>
-                        <Text style={styles.serviceText}>{service.service}</Text>
+                        {
+                            image_mapper[service.service] ?
+                            <Image
+                                source={{uri: image_mapper[service.addon?service.addon:service.service]}}
+                                style={styles.logo}
+                            />
+                            :
+                            <Text style={styles.serviceText}>{service.service}</Text>
+                        }
                         <Text style={styles.serviceDetails}>
                             Type: {service.streamingType} {service?.streamingType === 'addon' && service.addon && `(${formatAddon(service.addon)})`}
                         </Text>
@@ -71,4 +93,15 @@ const styles = StyleSheet.create({
         color: '#1e90ff',
         marginTop: 5,
     },
+    logoHolder: {
+        flex: 1,
+        width: '100%',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    logo: {
+      height: 50,
+      width: 50,
+      resizeMode: 'contain'
+    }
 })
