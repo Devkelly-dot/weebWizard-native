@@ -1,13 +1,20 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Linking, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Form from "../../../../components/form/form";
 import { useState } from "react";
 import StyledButton from "../../../../components/button/styledButton";
 import LoginButton from "../loginButton/loginButton";
 import { useRegister } from "../../../../context/registerContext/registerContext";
+import BouncyCheckbox from "react-native-bouncy-checkbox";
+import PrivacyPolicy from "./privacyPolicy";
 
 export default function RegisterForm() {
     const {register} = useRegister();
-    
+    const [termsClicked, setTermsClicked] = useState(false);
+    const [privacyClicked, setPrivacyClicked] = useState(false);
+    const [termsAgreed, setTermsAgreed] = useState(false);
+    const [privacyAgreed, setPrivacyAgreed] = useState(false);
+
+
     const [form, setForm] = useState({
         email: '',
         password: '',
@@ -39,6 +46,15 @@ export default function RegisterForm() {
     ];
     
     async function attemptRegister() {
+        if(!termsClicked || !privacyClicked) {
+            setError("Please review the terms & condtions and privacy policy before registering");
+            return;
+        }
+        if(!termsAgreed || !privacyAgreed) {
+            setError("Please agree to the terms & condtions and privacy policy before registering");
+            return;
+        }
+        setError("Blah")
         if(!form.email || !form.password) {
             setError("Please fill out all fields");
             return;
@@ -65,6 +81,16 @@ export default function RegisterForm() {
                 error && 
                 <Text style={styles.errorText}>{error}</Text>
             }
+            <PrivacyPolicy
+                termsClicked={termsClicked}
+                setTermsClicked={setTermsClicked}
+                termsAgreed={termsAgreed}
+                setTermsAgreed={setTermsAgreed}
+                privacyClicked={privacyClicked}
+                setPrivacyClicked={setPrivacyClicked}
+                privacyAgreed={privacyAgreed}
+                setPrivacyAgreed={setPrivacyAgreed}
+            />
             <View style={styles.registerHolder}>
                 <StyledButton
                     onPress={attemptRegister}
@@ -80,7 +106,7 @@ const styles = StyleSheet.create({
     container: {
         height: '100%',
         paddingHorizontal: 10,
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     errorText: {
         color: 'red',
@@ -89,5 +115,10 @@ const styles = StyleSheet.create({
     },
     registerHolder: {
         marginBottom: 10
+    },
+    agreementHolder: {
+        flexDirection: 'row',
+        marginVertical: 10,
+        gap: 10
     }
 })

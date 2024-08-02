@@ -1,4 +1,4 @@
-import { View, Image, StyleSheet } from "react-native";
+import { View, Image, StyleSheet, ScrollView } from "react-native";
 import RegisterForm from "../components/registerForm/registerForm";
 
 export default function RegisterPageContent() {
@@ -23,4 +23,3 @@ const styles = StyleSheet.create({
       opacity: 0.05
     },
   });
-  

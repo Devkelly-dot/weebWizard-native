@@ -109,7 +109,7 @@ export default function RecommendationForm() {
             <View style={styles.loginHolder}>
                 <StyledButton text={"Find Anime"} onPress={attemptGetRecommendations} />
             </View>
-            {subscriptionData?.subscriptionPlan?.title === 'free' && (
+            {/* {subscriptionData?.subscriptionPlan?.title === 'free' && (
                 <View>
                     <StyledButton
                         sx={{ backgroundColor: '#8e44ad', paddingHorizontal: 0 }}
@@ -117,7 +117,7 @@ export default function RecommendationForm() {
                         onPress={() => router.push('/pricing/pricing')}
                     />
                 </View>
-            )}
+            )} */}
         </View>
     );
 }

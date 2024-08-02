@@ -39,11 +39,11 @@ export default function PlanDetails({plan, onSubscribePress, canPurchase}) {
                     {plan?.displayName}
                 </Text>
                 {
-                    plan?.display_price_monthly && 
-                    <Text style={styles.planTitle}>
-                        {`${formatPrice(plan?.display_price_monthly)}`}
-                        <Text style={styles.smallerText}>/month</Text>
-                    </Text>
+                    // plan?.display_price_monthly && 
+                    // <Text style={styles.planTitle}>
+                    //     {`${formatPrice(plan?.display_price_monthly)}`}
+                    //     <Text style={styles.smallerText}>/month</Text>
+                    // </Text>
                 }
             </View>
             <View>
@@ -60,7 +60,7 @@ export default function PlanDetails({plan, onSubscribePress, canPurchase}) {
             </View>
             {plan?.price_monthly && (
                 <StyledButton
-                    text={"Purchase Plan"}
+                    text={"Coming Soon"}
                     onPress={onSubscribePress}
                     sx={styles.button}
                     disabled={!canPurchase}

@@ -89,7 +89,8 @@ export default function PricingContent() {
                             <PricingCard
                                 plan={plan}
                                 onSubscribePress={()=>plan?.title === "premium"&&!purchasedPressed&&onPurchaseClick(plan)}
-                                canPurchase={!purchasedPressed}
+                                // canPurchase={!purchasedPressed}
+                                canPurchase={false}
                             />
                         ))}
                     </View>

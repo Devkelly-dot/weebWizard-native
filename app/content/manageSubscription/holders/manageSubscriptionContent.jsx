@@ -45,24 +45,25 @@ const SubscriptionManagement = () => {
                 <View style={styles.card}>
                     <Text style={styles.title}>{subscriptionPlan?.displayName} Plan</Text>
                     <View style={styles.infoContainer}>
-                        <Text style={styles.infoText}>{`${isRenewing?"Renews":"Ends"} on ${endDate}`}</Text>
+                        {/* <Text style={styles.infoText}>{`${isRenewing?"Renews":"Ends"} on ${endDate}`}</Text> */}
                         <Text style={styles.infoText}>{`Anime Suggestions: ${suggestion_requests}/${subscriptionPlan?.includes.suggestion_requests}`}</Text>
                     </View>
                     {
-                        subscriptionPlan?.title!=='free' ?
+                        // subscriptionPlan?.title!=='free' ?
                         <TouchableOpacity
                             style={isRenewing ? styles.buttonOff : styles.buttonOn}
                             onPress={handleRenewalToggle}
                         >
-                            <Text style={styles.buttonText}>{isRenewing ? "Turn Auto Renew Off" : "Turn Auto Renew On"}</Text>
+                            <Text style={styles.buttonText}>Coming Soon</Text>
+                            {/* <Text style={styles.buttonText}>{isRenewing ? "Turn Auto Renew Off" : "Turn Auto Renew On"}</Text> */}
                         </TouchableOpacity>
-                        :
-                        <TouchableOpacity
-                            style={styles.buttonOn}
-                            onPress={routeToPricing}
-                        >
-                            <Text style={styles.buttonText}>Upgrade</Text>
-                        </TouchableOpacity>
+                        // :
+                        // <TouchableOpacity
+                        //     style={styles.buttonOn}
+                        //     onPress={routeToPricing}
+                        // >
+                        //     <Text style={styles.buttonText}>Coming Soon</Text>
+                        // </TouchableOpacity>
                     }
                 </View>
             </View>
